@@ -42,8 +42,11 @@ sub t1, t1, t2
 addi t2, t2, 1
 jal zero, loop
 end:
-addi t2, t2, -1 #decr length by 1 to account for \n while reading file
+li t4, 10
+bne t3, t4, continue #is last char not \n
+addi t2, t2, -1 #if \n, decr length by 1
 
+continue:
 #palindrome checking
 li t4, 1 #t4 stores ans
 mv t6, t2 #t6 stores right pointer
