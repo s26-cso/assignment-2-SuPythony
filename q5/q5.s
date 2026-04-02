@@ -11,6 +11,7 @@ no: .string "No\n"
 main:
 addi sp, sp, -16
 sd ra, 0(sp)
+sd s1, 8(sp)
 la a0, fname
 la a1, mode
 call fopen
@@ -19,15 +20,22 @@ li a0, 0
 call malloc
 mv t1, a0 #string pointer
 mv t2, zero #length
+addi s1, zero, 1 #cur max string lengthj
+
+#using realloc with doubling when full size reached
+#amortized O(1) complexity
 loop:
 mv a0, t0
 call fgetc
 blt a0, zero, end
 mv t3, a0 #cur char
+blt t2, s1, put #within array length
 mv a0, t1
-addi a1, t2, 1
+slli s1, s1, 2 #multiple max size by 2
+mv a1, s1
 call realloc
 mv t1, a0
+put:
 add t1, t1, t2
 sb t3, 0(t1)
 sub t1, t1, t2
@@ -67,5 +75,6 @@ fin:
 mv a0, t0
 call fclose
 ld ra, 0(sp)
+ld s1, 8(sp)
 addi sp, sp, 16
 ret
