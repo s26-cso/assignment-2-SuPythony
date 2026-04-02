@@ -12,6 +12,7 @@ int main() {
 	void *lib = dlopen(libname, RTLD_NOW);
 	int (*f)(int,int) = dlsym(lib, op);
 	printf("%d\n", f(a,b));
+	fflush(stdout);
 	dlclose(lib);
     }
     return 0;
