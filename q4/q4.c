@@ -3,10 +3,9 @@
 #include <dlfcn.h>
 
 int main() {
-    while (1) {
-	char op[6];
-	int a, b;
-	scanf("%s %d %d", op, &a, &b);
+    char op[6];
+    int a, b;
+    while (scanf("%s %d %d", op, &a, &b) == 1){
 	char libname[12] = "lib";
 	strcat(libname, op);
 	strcat(libname, ".so");
