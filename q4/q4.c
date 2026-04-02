@@ -6,7 +6,7 @@ int main() {
     char op[6];
     int a, b;
     while (scanf("%s %d %d", op, &a, &b) == 1){
-	char libname[12] = "lib";
+	char libname[14] = "./lib";
 	strcat(libname, op);
 	strcat(libname, ".so");
 	void *lib = dlopen(libname, RTLD_NOW);
