@@ -89,7 +89,8 @@ la a1, mode
 call fopen
 mv s1, a0 #reverse file pointer
 mv a0, s1
-li a1, -1 #assuming \n at end
+#li a1, -1 #assuming \n at end
+li a1, 0 #no \n
 li a2, 2 #SEEK_END
 call fseek #go to end
 
