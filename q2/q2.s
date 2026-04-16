@@ -1,7 +1,7 @@
 .data
 
 out1: .string "%lld "
-out2: .string "\n"
+out2: .string "%lld\n"
 test: .string "%lld\n"
 
 .text
@@ -121,14 +121,19 @@ mv a1, s5
 li a2, 0
 call get_no_at_index
 mv a1, a0
+addi s0, s0, -1
+beq s5, s0, last
 la a0, out1
+jal x0, pr
+last:
+la a0, out2
+pr:
+addi s0, s0, 1
 call printf
 addi s5, s5, 1
 jal zero, print_loop
 
 end:
-la a0, out2
-call printf
 mv a0, s2
 call free
 mv a0, s4
